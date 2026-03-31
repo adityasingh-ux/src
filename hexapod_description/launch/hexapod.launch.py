@@ -15,7 +15,7 @@ def generate_launch_description():
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
     pkg_mr_robot_desc = get_package_share_directory('hexapod_description')
 
-    world_path= get_package_share_directory("hexapod_description")+"/worlds/obs.world"
+    world_path= get_package_share_directory("hexapod_description")+"/worlds/obs2.world"
 
 
     gazebo=IncludeLaunchDescription(
@@ -40,8 +40,21 @@ def generate_launch_description():
                     os.path.join(pkg_mr_robot_desc, 'launch', 'robot.launch.py')
                 )
             )
+    
+        # RTAB-Map ROS Node
+    rtabmap_ros_node = Node(
+        package='rtabmap_slam',
+        executable='rtabmap',
+        name='rtabmap_ros',
+        parameters=[
+            # Add any RTAB-Map parameters here
+            {'use_sim_time': True}  # Example parameter
+        ],
+        output='screen'
+    )
 
     return LaunchDescription([
         gazebo,
-        robot
+        robot,
+        rtabmap_ros_node
     ])

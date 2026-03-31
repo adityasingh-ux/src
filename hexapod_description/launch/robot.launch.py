@@ -117,6 +117,7 @@ def generate_launch_description():
         default_value=default_world,
         description='World to load'
         )
+	
 
 	
 	return LaunchDescription([
@@ -148,6 +149,13 @@ def generate_launch_description():
 		controller_node,
 
 		ros_gz_bridge,
+
+		# Node(
+        #     package='tf2_ros', 
+        #     executable='static_transform_publisher', 
+        #     name='camera_tf_pub',
+        #     output='screen',
+        #     arguments=["0.2625", "0", "0.0405", "-1.57", "0", "-1.57", "base_link", "camera_link_optical"]),
 
 		# ros_gz_image_bridge
 	])
